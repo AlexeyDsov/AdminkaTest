@@ -1,8 +1,16 @@
+/* global setup */
 .clear {width: 0px; clear: both;}
 h1 {margin: 0px;}
 a {color: black;}
 a:visited {color: black;}
 
+/* head part */
+.loginWindow {
+	float: right;
+	width: 200px;
+}
+
+/* Admin Menu part*/
 .adminMenu {background-color: #dfeffc;}
 .adminMenuPart {
 	background-color: #a6c9e2;

@@ -11,7 +11,7 @@ if (!$isAjax) {
 			<link rel="stylesheet" media="all" type="text/css" href="<?=PATH_WEB_CSS?>redmond/jquery-ui-1.8.11.custom.css" />
 		</head>
 		<body>
-			<div style="float: right; width: 200px;">
+			<div class="loginWindow">
 				<?
 				if ($admin = $adminAuth->getUser()) {
 				?>
@@ -25,8 +25,8 @@ if (!$isAjax) {
 				}
 				?>
 			</div>
-			<div style="clear: both;"><!-- --></div>
 			<center><h1>Adminka (管理者向けの使用)</h1></center>
+			<div style="clear: both;"><!-- --></div>
 			<?
 			if ($admin = $adminAuth->getUser()) {
 				$partViewer->view('menu.main');
