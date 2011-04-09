@@ -18,9 +18,9 @@ ini_set('xdebug.var_display_max_data', 4096);
 date_default_timezone_set('Europe/Moscow');
 
 // paths
-define('PATH_WEB', 'http://stalkerxey.test/');
+define('PATH_WEB', 'http://adminka.test/');
 
-define('COOKIE_HOST_NAME', 'stalkerxey.test');
+define('COOKIE_HOST_NAME', 'adminka.test');
 
 // onPHP
 require PATH_EXTERNALS.'onPHP/global.inc.php.tpl';
