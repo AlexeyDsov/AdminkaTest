@@ -24,7 +24,8 @@ class WebAppControllerHandlerProject extends WebAppControllerHandler {
 		$model->
 			set('baseUrl', $chain->getPathWeb())->
 			set('controllerName', $controllerName)->
-			set('serviceLocator', $chain->getServiceLocator());
+			set('serviceLocator', $chain->getServiceLocator())->
+			set('isAjax', $chain->hasVar('isAjax') ? $chain->getVar('isAjax') : false);
 
 		// не перезаписывать
 		if (!$model->has('selfUrl')) {

@@ -1,0 +1,32 @@
+<?
+if (!empty($menuList)) {
+	$menuList;
+	$currentMenuParts = explode('.', $currentMenu);
+	$currentPart = array_shift($currentMenuParts);
+
+	$subMenuList = null;
+	foreach ($menuList as $menu) {
+		if (isset($menu->name) && isset($menu->url)) {
+			$isCurrent = ($currentPart == $menu->name);
+			if ($isCurrent && isset($menu->submenu)) {
+				$subMenuList = $menu->submenu;
+			}
+			$title = isset($menu->title) ? $menu->title : $menu->name;
+			?>
+			<div class="adminMenuPart <?=$isCurrent ? 'active' : ''?>">
+				<a href="<?=$menu->url?>" title="<?=$title?>"><?=$title?></a>
+			</div>
+			<?
+		}
+	}
+	?>
+	<div class="clear"></div>
+	<?
+	if (!empty($subMenuList)) {
+		$subModel = Model::create()
+			->set('menuList', $subMenuList)
+			->set('currentMenu', join('.', $currentMenuParts));
+		$partViewer->view('menu.part', $subModel);
+	}
+}
+?>

@@ -6,10 +6,10 @@ require PATH_BASE.'conf/config.inc.php';ini_set(
 	.PATH_CONTROLLERS_ADMIN.PATH_SEPARATOR
 );
 
-define('PATH_WEB_URL', PATH_WEB.'?');
+define('PATH_WEB_URL', PATH_WEB.'admin.php?');
 define('PATH_WEB_CSS', PATH_WEB.'css/');
 define('PATH_WEB_IMG', PATH_WEB.'img/');
-define('PATH_WEB_SCRIPTS', PATH_WEB.'scripts/');
+define('PATH_WEB_JS', PATH_WEB.'js/');
 
 try {
 	$application = WebApplication::create()->
@@ -23,6 +23,7 @@ try {
 				setCookieDomain(COOKIE_HOST_NAME)->
 				setSessionName('some_session')
 		)->
+		add(WebAppAjaxHandler::create())->
 		add(
 			WebAppAuthorisatorInit::create()->
 				addAuthorisator(

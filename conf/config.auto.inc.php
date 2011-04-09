@@ -19,6 +19,7 @@ ini_set(
 	.PATH_CLASSES.'Business'.PATH_SEPARATOR
 	.PATH_CLASSES.'Proto'.PATH_SEPARATOR
 	.PATH_CLASSES.'Utils'.PATH_SEPARATOR
+	.PATH_CLASSES.'menu'.PATH_SEPARATOR
 );
 require PATH_EXTERNALS . 'core/include.inc.php';
 

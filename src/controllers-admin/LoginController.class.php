@@ -43,18 +43,18 @@ class LoginController extends AdminBaseController {
 			return $this->getMav();
 		}
 
-		$authorisator = $this->serviceLocator->get('authorisator');
+		$authorisator = $this->serviceLocator->get('admin');
 		$authorisator->setUser($user);
 
-		return $this->getMavRedirectByUrl(PATH_WEB);
+		return $this->getMavRedirectByUrl(PATH_WEB_URL);
 	}
 
 	protected function unloginProcess(HttpRequest $request)
 	{
-		$authorisator = $this->serviceLocator->get('authorisator');
+		$authorisator = $this->serviceLocator->get('admin');
 		$authorisator->dropUser();
 
-		return $this->getMavRedirectByUrl(PATH_WEB);
+		return $this->getMavRedirectByUrl(PATH_WEB_URL);
 	}
 
 	protected function getAuthorisationForm()

@@ -1,0 +1,9 @@
+<div id="adminMenu" class="adminMenu">
+<?
+$menuList = AdminMenuConstructor::create()->getMenuList();
+$menuModel = Model::create()
+	->set('menuList', $menuList)
+	->set('currentMenu', isset($currentMenu) ? $currentMenu : '');
+$partViewer->view('menu.part', $menuModel);
+?>
+</div>
