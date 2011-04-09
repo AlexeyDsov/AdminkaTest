@@ -16,6 +16,28 @@ class WebAppControllerHandlerProject extends WebAppControllerHandler {
 
 	/**
 	 * @param InterceptingChain $chain
+	 * @return string
+	 */
+	protected function getControllerName(InterceptingChain $chain) {
+		$controllerName = parent::getControllerName($chain);
+		$adminAuthorisator = $chain->getServiceLocator()->get('admin');
+		/* @var $adminAuthorisator Authorisator */
+		if ($adminAuthorisator->getUser()) {
+			return $controllerName;
+		}
+
+		switch ($controllerName) {
+			case 'ErrorController':
+			case 'MainController':
+			case 'LoginController':
+				return $controllerName;
+			default:
+				return 'ErrorController';
+		}
+	}
+
+	/**
+	 * @param InterceptingChain $chain
 	 * @param string $controllerName
 	 * @param Model $model
 	 * @return WebAppControllerHandler
