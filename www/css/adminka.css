@@ -3,6 +3,7 @@
 h1 {margin: 0px;}
 a {color: black;}
 a:visited {color: black;}
+hr {margin: 3px auto;}
 
 /* head part */
 .loginWindow {

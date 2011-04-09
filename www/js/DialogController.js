@@ -21,11 +21,11 @@ DialogController.spawnByLink = function (link) {
 				jqXHR.done(function(r) {
 					responseText = r;
 				});
-				// See if a selector was specified
 				var dialog = self.markCurrent(self.spawn());
 				dialog.html($("<div>").append(responseText));
 				dialog.dialog("open");
 			} else {
+				//If not success - making window with error msg
 				var dialog = self.markCurrent(self.spawn());
 				dialog.html($("<div>").append("Loading page error..."));
 				dialog.dialog('option', {dialogClass: 'ui-state-error', title: 'Error'});
