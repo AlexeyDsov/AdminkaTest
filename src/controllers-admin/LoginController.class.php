@@ -1,5 +1,5 @@
 <?php
-class LoginController extends BaseController {
+class LoginController extends AdminBaseController {
 
 	protected $methodMap = array(
 		'getAuthData' => 'getAuthDataProcess',

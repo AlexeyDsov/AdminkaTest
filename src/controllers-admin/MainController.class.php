@@ -1,5 +1,5 @@
 <?php
-class MainController extends BaseController {
+class MainController extends AdminBaseController {
 	/**
 	 * @return ModelAndView
 	**/
