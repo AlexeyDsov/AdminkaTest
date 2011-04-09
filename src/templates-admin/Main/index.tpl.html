@@ -1,8 +1,22 @@
 <?
 $partViewer->view('header');
 ?>
-<h1>O LO LO</h1>
-
+<?
+if (!$isAjax) {
+?>
+	<a href="<?=PATH_WEB_URL?>" onclick="DialogController.spawnByLink(this); return false;">O LO LO</a>
+<?
+} else {
+?>
+	O LO LO LO
+	<script type="text/javascript">
+		DialogController.currentDialog.dialog('option', {
+			title: "o lo lo"
+		});
+	</script>
+<?
+}
+?>
 <?
 $partViewer->view('footer');
 ?>
