@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE metaconfiguration SYSTEM "meta.dtd">
+<!-- $Id: config.xml 1333 2010-01-13 12:56:07Z lom $ -->
+<metaconfiguration>
+
+	<classes>
+		<class name="FbUser" source="fb">
+			<properties>
+				<identifier type="Integer" name="id" column="id" />
+				<property name="email" type="String" size="128" required="true" />
+				<property name="name" type="String" size="64" required="true" />
+				<property name="password" type="String" size="32" required="true" />
+			</properties>
+			<pattern name="StraightMapping" />
+		</class>
+		
+		<class name="FbActor" source="fb">
+			<properties>
+				<identifier type="Integer" name="id" column="id" />
+				<property name="name" type="String" size="128" required="true" />
+				<property name="imdbId" type="Integer" />
+				<property name="description" type="String" />
+			</properties>
+			<pattern name="StraightMapping" />
+		</class>
+		
+		<class name="FbFilm" source="fb">
+			<properties>
+				<identifier type="Integer" name="id" column="id" />
+				<property name="name" type="String" size="128" required="true" />
+				<property name="imdbId" type="Integer" />
+				<property name="releaseDate" type="Date" />
+				<property name="description" type="String" />
+			</properties>
+			<pattern name="StraightMapping" />
+		</class>
+		
+		<class name="FbRole" source="fb">
+			<properties>
+				<identifier type="Integer" name="id" column="id" />
+				
+				<property name="film" type="FbFilm" relation="OneToOne" />
+				<property name="actor" type="FbActor" relation="OneToOne" />
+				
+				<property name="description" type="String" />
+			</properties>
+			<pattern name="StraightMapping" />
+		</class>
+		
+	</classes>
+	<sources>
+		<source name="fb" default="false"/>
+	</sources>
+</metaconfiguration>
