@@ -32,7 +32,7 @@ try {
 				)
 		)->
 		add(WebAppControllerResolverHandler::create())->
-		add(WebAppControllerHandlerProject::create())->
+		add(WebAppControllerHandlerAdmin::create())->
 		add(WebAppViewHandler::create());
 	$application->run();
 

@@ -1,8 +1,20 @@
 <?
 $partViewer->view('header');
+if (!isset($errorMsg)) {
+	$errorMsg = "Page not found";
+}
 ?>
 <center>
-	<h1>Page not found</h1>
+	<div style="width: 400px;">
+		<div class="ui-widget">
+			<div class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0 .7em;">
+				<p>
+					<span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>
+					<strong><?=$errorMsg?></strong>&nbsp;
+				</p>
+			</div>
+		</div>
+	</div>
 </center>
 <?
 $partViewer->view('footer');

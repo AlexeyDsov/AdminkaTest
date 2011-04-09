@@ -5,9 +5,9 @@
  ***************************************************************************/
 /* $Id: WebAppControllerHandler.class.php 283 2009-12-01 07:51:46Z lom $ */
 
-class WebAppControllerHandlerProject extends WebAppControllerHandler {
+class WebAppControllerHandlerIndex extends WebAppControllerHandler {
 	/**
-	 * @return WebAppControllerHandlerProject
+	 * @return WebAppControllerHandlerIndex
 	 */
 	public static function create()
 	{
@@ -16,31 +16,9 @@ class WebAppControllerHandlerProject extends WebAppControllerHandler {
 
 	/**
 	 * @param InterceptingChain $chain
-	 * @return string
-	 */
-	protected function getControllerName(InterceptingChain $chain) {
-		$controllerName = parent::getControllerName($chain);
-		$adminAuthorisator = $chain->getServiceLocator()->get('admin');
-		/* @var $adminAuthorisator Authorisator */
-		if ($adminAuthorisator->getUser()) {
-			return $controllerName;
-		}
-
-		switch ($controllerName) {
-			case 'ErrorController':
-			case 'MainController':
-			case 'LoginController':
-				return $controllerName;
-			default:
-				return 'ErrorController';
-		}
-	}
-
-	/**
-	 * @param InterceptingChain $chain
 	 * @param string $controllerName
 	 * @param Model $model
-	 * @return WebAppControllerHandler
+	 * @return WebAppControllerHandlerIndex
 	 */
 	protected function prepairNonRedirectModel(InterceptingChain $chain, $controllerName, Model $model) {
 		$model->
@@ -59,7 +37,7 @@ class WebAppControllerHandlerProject extends WebAppControllerHandler {
 	/**
 	 * @param InterceptingChain $chain
 	 * @param Controller $controller
-	 * @return WebAppControllerHandler
+	 * @return WebAppControllerHandlerIndex
 	 */
 	protected function prepairController(InterceptingChain $chain, Controller $controller)
 	{
