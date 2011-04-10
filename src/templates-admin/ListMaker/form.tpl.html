@@ -8,7 +8,7 @@ if (!isset($postfix)) {
 ?>
 <form id="listForm<?=$postfix?>" method="GET" action="<?=PATH_WEB_URL?>">
 	<?
-	foreach ($urlParts as $param => $value) {
+	foreach ($urlParams as $param => $value) {
 	?>
 		<input type="hidden" name="<?=$param?>" value="<?=Filter::htmlSpecialChars()->apply($value)?>" />
 	<?

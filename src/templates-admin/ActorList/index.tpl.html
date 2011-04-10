@@ -1,16 +1,24 @@
 <?
 $partViewer->view('header');
 
+$urlParams = array('area' => 'ActorList', 'action' => 'list');
 $model = Model::create()->
 	set('form', $form)->
 	set('propertyList', $propertyList)->
-	set('urlParts', array('area' => 'ActorList', 'action' => 'list'));
+	set('urlParams', $urlParams);
 
 $partViewer->view('ListMaker/form', $model);
 
 /* @var $queryResult QueryResult */
 if (isset($queryResult)) {
 	if ($queryResult->getList()) {
+		$pagerModel = Model::create()->
+			set('totalCount', $queryResult->getCount())->
+			set('offset', $form->getSafeValue('offset'))->
+			set('limit', 10)->
+			set('baseUrl', PATH_WEB_URL)->
+			set('urlParams', $urlParams + $form->export());
+		$partViewer->view('Pager/offset', $pagerModel);
 		?>
 		<table style="width: 95%">
 			<tr>
@@ -21,12 +29,12 @@ if (isset($queryResult)) {
 				<td>Description:</td>
 				<td>Actions</td>
 			</tr>
-			<tr>
-				<?
-				/* @var $actor FbActor */
-				$num = $queryResult->getCount();
-				foreach ($queryResult->getList() as $actor) {
-					?>
+			<?
+			/* @var $actor FbActor */
+			$num = $form->getSafeValue('offset') + 1;
+			foreach ($queryResult->getList() as $actor) {
+				?>
+				<tr>
 					<td><?=$num++?></td>
 					<td><?=$actor->getId()?></td>
 					<td><?=$actor->getName()?></td>
@@ -36,12 +44,13 @@ if (isset($queryResult)) {
 						<a href="#">Edit</a>
 						<a href="#">Delete</a>
 					</td>
-					<?
-				}
-				?>
-			</tr>
+				</tr>
+				<?
+			}
+			?>
 		</table>
 		<?
+		$partViewer->view('Pager/offset', $pagerModel);
 	} else {
 		?>
 		<div>Не найдено ни одного элемента</div>
