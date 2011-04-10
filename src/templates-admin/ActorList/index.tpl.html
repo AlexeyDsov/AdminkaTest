@@ -1,0 +1,52 @@
+<?
+$partViewer->view('header');
+
+$model = Model::create()->
+	set('form', $form)->
+	set('propertyList', $propertyList)->
+	set('urlParts', array('area' => 'ActorList', 'action' => 'list'));
+
+$partViewer->view('ListMaker/form', $model);
+
+/* @var $queryResult QueryResult */
+if (isset($queryResult)) {
+	if ($queryResult->getList()) {
+		?>
+		<table style="width: 95%">
+			<tr>
+				<td>Num:</td>
+				<td>Id:</td>
+				<td>Name:</td>
+				<td>Imdb id:</td>
+				<td>Description:</td>
+				<td>Actions</td>
+			</tr>
+			<tr>
+				<?
+				/* @var $actor FbActor */
+				$num = $queryResult->getCount();
+				foreach ($queryResult->getList() as $actor) {
+					?>
+					<td><?=$num++?></td>
+					<td><?=$actor->getId()?></td>
+					<td><?=$actor->getName()?></td>
+					<td><?=$actor->getImdbId()?></td>
+					<td><?=$actor->getDescription()?></td>
+					<td>
+						<a href="#">Edit</a>
+						<a href="#">Delete</a>
+					</td>
+					<?
+				}
+				?>
+			</tr>
+		</table>
+		<?
+	} else {
+		?>
+		<div>Не найдено ни одного элемента</div>
+		<?
+	}
+}
+$partViewer->view('footer');
+?>

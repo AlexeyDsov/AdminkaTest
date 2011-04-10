@@ -1,0 +1,34 @@
+<?
+$noPostfix = false;
+if (!isset($postfix)) {
+	$postfix = time().microtime();
+	$model->set('postfix', $postfix);
+	$noPostfix = true;
+}
+?>
+<form id="listForm<?=$postfix?>" method="GET" action="<?=PATH_WEB_URL?>">
+	<?
+	foreach ($urlParts as $param => $value) {
+	?>
+		<input type="hidden" name="<?=$param?>" value="<?=Filter::htmlSpecialChars()->apply($value)?>" />
+	<?
+	}
+
+	foreach ($propertyList as $propertyName => $options) {
+		if (
+			isset($options[ListMakerProperties::OPTION_FILTERABLE])
+			&& !empty($options[ListMakerProperties::OPTION_FILTERABLE])
+		) {
+			$model->set('propertyName', $propertyName);
+			$partViewer->view('ListMaker/property');
+		}
+	}
+	$model->drop('propertyName');
+	?>
+	<input type="submit" value="Search"/>
+</form>
+<?
+if ($noPostfix) {
+	$model->drop('postfix');
+}
+?>
