@@ -1,0 +1,39 @@
+<?
+/* @var $totalCount int */
+/* @var $offset int */
+/* @var $limit int */
+/* @var $baseUrl string */
+/* @var $offsetName string */
+Assert::isNotNull($totalCount);
+Assert::isNotNull($offset);
+Assert::isNotNull($limit);
+Assert::isNotNull($baseUrl);
+if (isset($urlParams)) {
+	Assert::isArray($urlParams);
+} else {
+	$urlParams = array();
+}
+if (!isset($offsetName)) {
+	$offsetName = 'offset';
+}
+
+$currentPage = (($offset - ($offset % $limit)) / $limit) + 1;
+$pageCount = (($totalCount - ($totalCount % $limit)) / $limit) + 1;
+?>
+<div class="pager">
+	<?
+	for ($iteratorPage = 1; $iteratorPage <= $pageCount; $iteratorPage++) {
+		if ($currentPage != $iteratorPage) {
+			$urlParams[$offsetName] = ($iteratorPage - 1) * $limit;
+			$linkUrl = $baseUrl.  http_build_query($urlParams);
+			?>
+			<a href="<?=$linkUrl?>"><?=$iteratorPage?></a>
+			<?
+		} else {
+			?>
+			<?=$iteratorPage?>
+			<?
+		}
+	}
+	?>
+</div>
