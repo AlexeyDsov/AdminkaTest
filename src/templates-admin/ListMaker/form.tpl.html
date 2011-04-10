@@ -6,7 +6,8 @@ if (!isset($postfix)) {
 	$noPostfix = true;
 }
 ?>
-<form id="listForm<?=$postfix?>" method="GET" action="<?=PATH_WEB_URL?>">
+<form id="listForm<?=$postfix?>" method="GET" action="<?=PATH_WEB_URL?>"
+	onsubmit="$(this.elements).filter(':text[value=\'\'],:checkbox[checked=false],:radio[checked=false],:submit').attr('disabled', 'true');">
 	<?
 	foreach ($urlParams as $param => $value) {
 	?>
