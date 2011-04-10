@@ -19,14 +19,26 @@ if (isset($queryResult)) {
 			set('baseUrl', PATH_WEB_URL)->
 			set('urlParams', $urlParams + $form->export());
 		$partViewer->view('Pager/offset', $pagerModel);
+
+		$columnParams = $form->export();
+		foreach (array_keys($columnParams) as $propertyName) {
+			unset($columnParams[$propertyName]['order']);
+			unset($columnParams[$propertyName]['sort']);
+		}
+
+		$columnModel = Model::create()->
+			set('propertyList', $propertyList)->
+			set('baseUrl', PATH_WEB_URL)->
+			set('urlParams', $urlParams + $columnParams)->
+			set('formData', $form->export());
 		?>
 		<table style="width: 95%">
 			<tr>
 				<td>Num:</td>
-				<td>Id:</td>
-				<td>Name:</td>
-				<td>Imdb id:</td>
-				<td>Description:</td>
+				<td><?$partViewer->view('ListMaker/column', $columnModel->set('propertyName', 'id'))?></td>
+				<td><?$partViewer->view('ListMaker/column', $columnModel->set('propertyName', 'name'))?></td>
+				<td><?$partViewer->view('ListMaker/column', $columnModel->set('propertyName', 'imdb id'))?></td>
+				<td><?$partViewer->view('ListMaker/column', $columnModel->set('propertyName', 'description'))?></td>
 				<td>Actions</td>
 			</tr>
 			<?

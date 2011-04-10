@@ -54,6 +54,11 @@ class ActorListController extends AdminBaseController {
 		return $this->getMav();
 	}
 
+	protected function prepairData(HttpRequest $request) {
+		parent::prepairData($request);
+		$this->model->set('currentMenu', 'Actor.List');
+	}
+
 	protected function getPropertyList() {
 		return array(
 			'id' => array(
@@ -78,6 +83,7 @@ class ActorListController extends AdminBaseController {
 				ListMakerProperties::OPTION_FILTERABLE => array(
 					ListMakerProperties::OPTION_FILTERABLE_ILIKE,
 					ListMakerProperties::OPTION_FILTERABLE_IS_NULL,
+					ListMakerProperties::OPTION_FILTERABLE_IS_NOT_NULL,
 				)
 			),
 		);
