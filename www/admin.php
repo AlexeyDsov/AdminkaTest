@@ -25,7 +25,7 @@ try {
 		)->
 		add(WebAppAjaxHandler::create())->
 		add(
-			WebAppAuthorisatorInit::create()->
+			WebAppAuthorisatorHandler::create()->
 				addAuthorisator(
 					'admin',
 					Authorisator::create()->setUserClassName('FbUser')
@@ -33,7 +33,7 @@ try {
 		)->
 		add(WebAppControllerResolverHandler::create())->
 		add(WebAppControllerHandlerAdmin::create())->
-		add(WebAppViewHandler::create());
+		add(WebAppViewHandlerProject::create());
 	$application->run();
 
 } catch (Exception $e) {

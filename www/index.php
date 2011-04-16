@@ -37,7 +37,7 @@ try {
 				setSessionName('some_session')
 		)->
 		add(
-			WebAppAuthorisatorInit::create()->
+			WebAppAuthorisatorHandler::create()->
 				addAuthorisator(
 					'authorisator',
 					Authorisator::create()->setUserClassName('FbUser')
