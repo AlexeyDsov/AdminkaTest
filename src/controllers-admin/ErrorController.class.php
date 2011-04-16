@@ -1,5 +1,6 @@
 <?php
-class ErrorController extends AdminBaseController {
+class ErrorController extends AdminBaseController
+{
 	/**
 	 * @return ModelAndView
 	**/

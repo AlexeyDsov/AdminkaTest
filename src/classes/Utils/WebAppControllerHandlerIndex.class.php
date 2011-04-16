@@ -5,7 +5,8 @@
  ***************************************************************************/
 /* $Id: WebAppControllerHandler.class.php 283 2009-12-01 07:51:46Z lom $ */
 
-class WebAppControllerHandlerIndex extends WebAppControllerHandler {
+class WebAppControllerHandlerIndex extends WebAppControllerHandler
+{
 	/**
 	 * @return WebAppControllerHandlerIndex
 	 */

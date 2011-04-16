@@ -1,5 +1,6 @@
 <?php
-class MainController extends BaseController {
+class MainController extends BaseController
+{
 	/**
 	 * @return ModelAndView
 	**/

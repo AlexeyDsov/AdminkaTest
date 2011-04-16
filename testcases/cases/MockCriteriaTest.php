@@ -1,5 +1,6 @@
 <?php
-class MockCriteriaTest extends PHPUnit_Framework_TestCase implements IMockSpawnSupport {
+class MockCriteriaTest extends PHPUnit_Framework_TestCase implements IMockSpawnSupport
+{
 	
 	//start *interface IMockSpawnSupport part*
 	public function getAny() {
@@ -47,9 +48,9 @@ class MockCriteriaTest extends PHPUnit_Framework_TestCase implements IMockSpawnS
 	 * @test
 	 */
 	public function returnValueInMethod() {
-		$mock = $this->getService()
-			->addMethod(MockMethod::create('sum')->setReturn(3)->setCallTimes(1))
-			->spawn($this);
+		$mock = $this->getService()->
+			addMethod(MockMethod::create('sum')->setReturn(3)->setCallTimes(1))->
+			spawn($this);
 		$this->assertEquals(3, $mock->sum(1, 2), 'Mock must return 3');
 	}
 	
@@ -57,10 +58,10 @@ class MockCriteriaTest extends PHPUnit_Framework_TestCase implements IMockSpawnS
 	 * @test
 	 */
 	public function returnValueArgument() {
-		$mock = $this->getService()
-			->addMethod(MockMethod::create('sum')->setReturnArgument(0))
-			->addMethod(MockMethod::create('div')->setReturnArgument(1))
-			->spawn($this);
+		$mock = $this->getService()->
+			addMethod(MockMethod::create('sum')->setReturnArgument(0))->
+			addMethod(MockMethod::create('div')->setReturnArgument(1))->
+			spawn($this);
 		$this->assertEquals(10, $mock->sum(10, 20));
 		$this->assertEquals(20, $mock->div(10, 20));
 	}
@@ -69,12 +70,12 @@ class MockCriteriaTest extends PHPUnit_Framework_TestCase implements IMockSpawnS
 	 * @test
 	 */
 	public function thowException() {
-		$mock = $this->getService()
-			->addMethod(
-				MockMethod::create('div')
-					->setThrowException(new Exception($excMsg = 'exception message', $excCode = 667))
-			)
-			->spawn($this);
+		$mock = $this->getService()->
+			addMethod(
+				MockMethod::create('div')->
+					setThrowException(new Exception($excMsg = 'exception message', $excCode = 667))
+			)->
+			spawn($this);
 		
 		try {
 			$result = $mock->div(100, 0);
@@ -89,18 +90,18 @@ class MockCriteriaTest extends PHPUnit_Framework_TestCase implements IMockSpawnS
 	 * @test
 	 */
 	public function callMethodNever() {
-		$mock = $this->getService()
-			->addMethod(MockMethod::create('sum')->setCallTimes(0))
-			->spawn($this);
+		$mock = $this->getService()->
+			addMethod(MockMethod::create('sum')->setCallTimes(0))->
+			spawn($this);
 	}
 	
 	/**
 	 * @test
 	 */
 	public function callMethodThreeTimes() {
-		$mock = $this->getService()
-			->addMethod(MockMethod::create('sum')->setCallTimes(3))
-			->spawn($this);
+		$mock = $this->getService()->
+			addMethod(MockMethod::create('sum')->setCallTimes(3))->
+			spawn($this);
 		$this->assertNull($mock->sum(1, 1));
 		$this->assertNull($mock->sum(1, 1));
 		$this->assertNull($mock->sum(1, 1));
@@ -110,9 +111,9 @@ class MockCriteriaTest extends PHPUnit_Framework_TestCase implements IMockSpawnS
 	 * @test
 	 */
 	public function testLambdaFunction() {
-		$mock = $this->getService()
-			->addMethod(MockMethod::create('sum')->setReturnFunction(true)->setFunction(function($a, $b) {return 5;}))
-			->spawn($this);
+		$mock = $this->getService()->
+			addMethod(MockMethod::create('sum')->setReturnFunction(true)->setFunction(function($a, $b) {return 5;}))->
+			spawn($this);
 			
 		$this->assertEquals(5, $mock->sum(10, 10));
 	}
@@ -127,16 +128,16 @@ class MockCriteriaTest extends PHPUnit_Framework_TestCase implements IMockSpawnS
 		$object->push($subObject);
 		//end hack
 		
-		$mock = $this->getService()
-			->addMethod(
-				MockMethod::create('div')
-					->setReturnSelf(true)
-					->setFunction(function(SplStack $object) {
+		$mock = $this->getService()->
+			addMethod(
+				MockMethod::create('div')->
+					setReturnSelf(true)->
+					setFunction(function(SplStack $object) {
 						$subObject = $object->pop();
 						$subObject->push('hou hou hou');
 					})
-			)
-			->spawn($this);
+			)->
+			spawn($this);
 			
 		$this->assertEquals($mock, $mock->div($object, 10));
 		$this->assertEquals('hou hou hou', $subObject->pop());
@@ -146,16 +147,16 @@ class MockCriteriaTest extends PHPUnit_Framework_TestCase implements IMockSpawnS
 	 * @test
 	 */
 	public function callMethodAtTime() {
-		$mock = $this->getService()
-			->addMethod(MockMethodAt::create('sum', 0)->setReturn(1))
-			->addMethod(
-				MockMethodAt::create('sum', 1)
-					->setReturnFunction(true)
-					->setFunction(function() {return 2;})
-			)
-			->addMethod(MockMethodAt::create('sum', 2)->setThrowException(new Exception()))
-			->addMethod(MockMethodAt::create('sum', 3)->setReturnArgument(1))
-			->spawn($this);
+		$mock = $this->getService()->
+			addMethod(MockMethodAt::create('sum', 0)->setReturn(1))->
+			addMethod(
+				MockMethodAt::create('sum', 1)->
+					setReturnFunction(true)->
+					setFunction(function() {return 2;})
+			)->
+			addMethod(MockMethodAt::create('sum', 2)->setThrowException(new Exception()))->
+			addMethod(MockMethodAt::create('sum', 3)->setReturnArgument(1))->
+			spawn($this);
 		$this->assertEquals(1, $mock->sum(1, 2));
 		$this->assertEquals(2, $mock->sum(1, 2));
 		try {
@@ -171,16 +172,16 @@ class MockCriteriaTest extends PHPUnit_Framework_TestCase implements IMockSpawnS
 	public function failOnManyReturns() {
 		$this->setExpectedException('WrongStateException');
 		
-		$mock = $this->getService()
-			->addMethod(
-				MockMethod::create('sum')
-					->setReturnArgument(0)
-					->setThrowException(new Exception())
-					->setReturnSelf(true)
-					->setReturnFunction(true)
-					->setFunction(function() {return 5;})
-			)
-			->spawn($this);
+		$mock = $this->getService()->
+			addMethod(
+				MockMethod::create('sum')->
+					setReturnArgument(0)->
+					setThrowException(new Exception())->
+					setReturnSelf(true)->
+					setReturnFunction(true)->
+					setFunction(function() {return 5;})
+			)->
+			spawn($this);
 	}
 	
 	/**
@@ -189,9 +190,9 @@ class MockCriteriaTest extends PHPUnit_Framework_TestCase implements IMockSpawnS
 	public function failSetDoubleMethods() {
 		$this->setExpectedException('WrongArgumentException');
 		
-		$mock = $this->getService()
-			->addMethod(MockMethod::create('sum'))
-			->addMethod(MockMethod::create('sum'));
+		$mock = $this->getService()->
+			addMethod(MockMethod::create('sum'))->
+			addMethod(MockMethod::create('sum'));
 	}
 	
 	/**
@@ -200,9 +201,9 @@ class MockCriteriaTest extends PHPUnit_Framework_TestCase implements IMockSpawnS
 	public function failSetDoubleAtMethods() {
 		$this->setExpectedException('WrongArgumentException');
 		
-		$mock = $this->getService()
-			->addMethod(MockMethodAt::create('sum', 1))
-			->addMethod(MockMethodAt::create('sum', 1));
+		$mock = $this->getService()->
+			addMethod(MockMethodAt::create('sum', 1))->
+			addMethod(MockMethodAt::create('sum', 1));
 	}
 	
 	/**
@@ -211,9 +212,9 @@ class MockCriteriaTest extends PHPUnit_Framework_TestCase implements IMockSpawnS
 	public function failSetDifferentMethodsOne() {
 		$this->setExpectedException('WrongArgumentException');
 		
-		$mock = $this->getService()
-			->addMethod(MockMethod::create('sum'))
-			->addMethod(MockMethodAt::create('sum'));
+		$mock = $this->getService()->
+			addMethod(MockMethod::create('sum'))->
+			addMethod(MockMethodAt::create('sum'));
 	}
 	
 	/**
@@ -222,9 +223,9 @@ class MockCriteriaTest extends PHPUnit_Framework_TestCase implements IMockSpawnS
 	public function failSetDifferentMethodsTwo() {
 		$this->setExpectedException('WrongArgumentException');
 		
-		$mock = $this->getService()
-			->addMethod(MockMethodAt::create('sum', 1))
-			->addMethod(MockMethod::create('sum'));
+		$mock = $this->getService()->
+			addMethod(MockMethodAt::create('sum', 1))->
+			addMethod(MockMethod::create('sum'));
 	}
 	
 	/**
