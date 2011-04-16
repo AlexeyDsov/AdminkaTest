@@ -1,12 +1,12 @@
 <?php
-class ErrorController extends AdminBaseController
-{
-	/**
-	 * @return ModelAndView
-	**/
-	public function handleRequest(HttpRequest $request)
+	class ErrorController extends AdminBaseController
 	{
-		return $this->getMav();
+		/**
+		 * @return ModelAndView
+		**/
+		public function handleRequest(HttpRequest $request)
+		{
+			return $this->getMav();
+		}
 	}
-}
 ?>

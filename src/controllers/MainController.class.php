@@ -1,12 +1,12 @@
 <?php
-class MainController extends BaseController
-{
-	/**
-	 * @return ModelAndView
-	**/
-	public function handleRequest(HttpRequest $request)
+	class MainController extends BaseController
 	{
-		return $this->getMav();
+		/**
+		 * @return ModelAndView
+		**/
+		public function handleRequest(HttpRequest $request)
+		{
+			return $this->getMav();
+		}
 	}
-}
 ?>
