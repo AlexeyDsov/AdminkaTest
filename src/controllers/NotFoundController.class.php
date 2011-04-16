@@ -10,7 +10,7 @@
  *                                                                         *
  ***************************************************************************/
 
-	class ErrorController extends BaseController
+	class NotFoundController extends BaseController
 	{
 		/**
 		 * @return ModelAndView
