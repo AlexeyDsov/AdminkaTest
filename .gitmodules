@@ -1,6 +1,6 @@
 [submodule "externals/core"]
 	path = externals/core
-	url = /home/stalkerxey/gitrepos/core/core.git
+	url = git@github.com:AlexeyDsov/MyCore.git
 [submodule "externals/onPHP"]
 	path = externals/onPHP
 	url = /home/stalkerxey/gitrepos/onPHP/onPHP.git
