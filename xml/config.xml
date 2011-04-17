@@ -1,10 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE metaconfiguration SYSTEM "meta.dtd">
-<!-- $Id: config.xml 1333 2010-01-13 12:56:07Z lom $ -->
 <metaconfiguration>
 	<include file="config-fb.xml" generate="true" />
 
 	<classes>
-		
+
 	</classes>
 </metaconfiguration>

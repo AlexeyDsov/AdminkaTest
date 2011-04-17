@@ -8,7 +8,7 @@ setlocale(LC_CTYPE, "ru_RU.UTF8");
 setlocale(LC_TIME, "ru_RU.UTF8");
 
 // Xdebug settings @see phpinfo()
-ini_set('display_errors',1);
+ini_set('display_errors', 1);
 ini_set('xdebug.show_local_vars', 'on');
 ini_set('xdebug.dump_globals', 'on');
 ini_set('xdebug.dump.GET', '*');
@@ -35,20 +35,8 @@ spl_autoload_register('__autoload');
 
 DBPool::me()->addLink(
 	'fb',
-	DB::spawn('PgSQL', 'stalkerxey', '123456', '127.0.0.1', 'stalkerxey')
+	DB::spawn('PgSQL', 'dbuser', 'dbpass', 'dbhost', 'dbname')
 );
-
-/* cache * /
-Cache::setPeer(
-	WatermarkedPeer::create(
-		Memcached::create('127.0.0.1'),
-		'stalkerxey_v01'
-	)
-);
-Cache::setDefaultWorker('CacheDaoWorker');
-/**/
-
-//Cache::me()->clean();
 
 /**
  * session in memcache
