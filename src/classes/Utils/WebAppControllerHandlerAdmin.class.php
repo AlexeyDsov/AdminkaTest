@@ -38,6 +38,7 @@
 				);
 				if (!in_array($controllerName, $allowedControllers)) {
 					$controllerName = 'AccessDeniedController';
+					$chain->setControllerName($controllerName);
 				}
 			}
 
