@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <?
-if (!$isAjax) {
-	$adminAuth = $serviceLocator->get('admin');
+if (!$this->get('isAjax')) {
+	$adminAuth = $this->get('serviceLocator')->get('admin');
 	?>
 	<html>
 		<head>

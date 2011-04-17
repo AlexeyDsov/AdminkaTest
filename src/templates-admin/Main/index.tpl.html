@@ -2,7 +2,7 @@
 $partViewer->view('header');
 ?>
 <?
-if (!$isAjax) {
+if (!$this->get('isAjax')) {
 ?>
 	<a href="<?=PATH_WEB_URL?>" onclick="DialogController.spawnByLink(this); return false;">O LO LO</a>
 <?

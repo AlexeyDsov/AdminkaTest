@@ -25,19 +25,11 @@
 		 * @param Model $model
 		 * @return ViewResolver
 		 */
-		protected function getViewResolver(InterceptingChain $chain, Model $model) {
-			return PhpViewResolver::create($chain->getPathTemplate(), EXT_TPL);
-		}
-
-		/**
-		 * @param Model $model
-		 * @return WebAppViewHandlerProject
-		 */
-		protected function updateNonRedirectModel(InterceptingChain $chain, Model $model) {
-			$model->set('isAjax', $chain->hasVar('isAjax') ? $chain->getVar('isAjax') : false);
-			$model->set('serviceLocator', $chain->getServiceLocator());
-
-			return $this;
+		protected function getViewResolver(InterceptingChain $chain, Model $model)
+		{
+			return PhpViewResolverParametrized::create($chain->getPathTemplate(), EXT_TPL)
+				->set('isAjax', $chain->hasVar('isAjax') ? $chain->getVar('isAjax') : false)
+				->set('serviceLocator', $chain->getServiceLocator());
 		}
 	}
 ?>
