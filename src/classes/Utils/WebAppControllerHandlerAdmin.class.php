@@ -24,7 +24,8 @@
 		 * @param InterceptingChain $chain
 		 * @return string
 		 */
-		protected function getController(InterceptingChain $chain) {
+		protected function getController(InterceptingChain $chain)
+		{
 			$controllerName = $chain->getControllerName();
 
 			$adminAuthorisator = $chain->getServiceLocator()->get('admin');
@@ -38,7 +39,9 @@
 				);
 				if (!in_array($controllerName, $allowedControllers)) {
 					$controllerName = 'AccessDeniedController';
-					$chain->setControllerName($controllerName);
+					$chain->
+						dropVar(WebApplication::OBJ_CONTROLLER_NAME)->
+						setControllerName($controllerName);
 				}
 			}
 

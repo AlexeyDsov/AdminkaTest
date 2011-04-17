@@ -45,7 +45,7 @@ try {
 		)->
 		add(WebAppControllerResolverHandler::create())->
 		add(WebAppControllerHandlerIndex::create())->
-		add(WebAppViewHandler::create());
+		add(WebAppViewHandlerProject::create());
 	$application->run();
 
 } catch (Exception $e) {
