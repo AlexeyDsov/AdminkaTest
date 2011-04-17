@@ -13,17 +13,19 @@
 			</properties>
 			<pattern name="StraightMapping" />
 		</class>
-		
+
 		<class name="FbActor" source="fb">
 			<properties>
 				<identifier type="Integer" name="id" column="id" />
 				<property name="name" type="String" size="128" required="true" />
 				<property name="imdbId" type="Integer" />
 				<property name="description" type="String" />
+
+				<property name="roles" type="FbRole" relation="OneToMany" />
 			</properties>
 			<pattern name="StraightMapping" />
 		</class>
-		
+
 		<class name="FbFilm" source="fb">
 			<properties>
 				<identifier type="Integer" name="id" column="id" />
@@ -31,22 +33,24 @@
 				<property name="imdbId" type="Integer" />
 				<property name="releaseDate" type="Date" />
 				<property name="description" type="String" />
+
+				<property name="roles" type="FbRole" relation="OneToMany" />
 			</properties>
 			<pattern name="StraightMapping" />
 		</class>
-		
+
 		<class name="FbRole" source="fb">
 			<properties>
 				<identifier type="Integer" name="id" column="id" />
-				
-				<property name="film" type="FbFilm" relation="OneToOne" />
-				<property name="actor" type="FbActor" relation="OneToOne" />
-				
+
+				<property name="film" type="FbFilm" relation="OneToOne" fetch="lazy" />
+				<property name="actor" type="FbActor" relation="OneToOne" fetch="lazy" />
+
 				<property name="description" type="String" />
 			</properties>
 			<pattern name="StraightMapping" />
 		</class>
-		
+
 	</classes>
 	<sources>
 		<source name="fb" default="false"/>
