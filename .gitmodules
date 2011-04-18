@@ -3,4 +3,4 @@
 	url = git@github.com:AlexeyDsov/MyCore.git
 [submodule "externals/onPHP"]
 	path = externals/onPHP
-	url = git@github.com:onPHP/framework.git
+	url = git@github.com:onPHP/onphp-framework.git
