@@ -37,6 +37,7 @@ try {
 	$application->run();
 
 } catch (Exception $e) {
+	print "<pre>";
 	var_dump(get_class($e), $e->getMessage(), $e->getFile(), $e->getLine(), $e->getTraceAsString());
 	exit;
 }
