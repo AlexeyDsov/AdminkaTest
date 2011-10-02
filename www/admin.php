@@ -1,6 +1,7 @@
 <?php
 require dirname(dirname(__FILE__)).'/conf/constants.auto.inc.php';
-require PATH_BASE.'conf/config.inc.php';ini_set(
+require PATH_BASE.'conf/config.inc.php';
+ini_set(
 	'include_path',
 	get_include_path()
 	.PATH_CONTROLLERS_ADMIN.PATH_SEPARATOR
